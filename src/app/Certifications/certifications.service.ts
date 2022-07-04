@@ -9,7 +9,7 @@ import { Certification } from './certification';
 })
 export class CertificationsService {
 
-  private baseURL="http://localhost:8080/api/v1/hr_management_system/certifications/";
+  private baseURL="http://localhost:8080/hr_management/certification/";
   constructor(private httpClient: HttpClient) { }
 
   addCertification(certification: Certification, userId:Guid): Observable<Object>{
@@ -18,16 +18,16 @@ export class CertificationsService {
   getCertifications():Observable<Certification[]>{
     return this.httpClient.get<Certification[]>(`${this.baseURL+"getAll"}`);
   }
-  getCertificationByCertificationId(certificationId:Guid): Observable<Certification>{
-    return this.httpClient.get<Certification>(`${this.baseURL+"getCertificationById"}/${certificationId}`);
+  getCertificationByCertificationId(certificationID:Guid): Observable<Certification>{
+    return this.httpClient.get<Certification>(`${this.baseURL+"getCertificationById"}/${certificationID}`);
   }
   getCertificationByUserId(userId:Guid): Observable<Certification[]>{
     return this.httpClient.get<Certification[]>(`${this.baseURL+"getCertificationsByUserId"}/${userId}`);
   }
-  editCertification(certificationId:Guid, certification:Certification):Observable<Object>{
-    return this.httpClient.put(`${this.baseURL+"editCertification"}/${certificationId}`, certification);
+  editCertification(certificationID:Guid, certification:Certification):Observable<Object>{
+    return this.httpClient.put(`${this.baseURL+"editCertification"}/${certificationID}`, certification);
   }
-  deleteCertification(certificationId:Guid):Observable<Certification>{
-    return this.httpClient.delete<Certification>(`${this.baseURL+"deleteCertification"}/${certificationId}`);
+  deleteCertification(certificationID:Guid):Observable<Certification>{
+    return this.httpClient.delete<Certification>(`${this.baseURL+"deleteCertification"}/${certificationID}`);
   }
 }

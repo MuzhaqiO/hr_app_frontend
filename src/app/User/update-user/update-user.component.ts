@@ -20,8 +20,8 @@ export class UpdateUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.userId = this.route.snapshot.params['userId'];
-   // debugger;
-    this.userService.getUserById(this.userId).subscribe(data => {
+   // ;
+    this.userService.getWholeUserByUserId(this.userId).subscribe(data => {
       
       this.user = data;
     }, error =>console.log(error));
@@ -37,6 +37,11 @@ export class UpdateUserComponent implements OnInit {
   }*/
   
   onSubmit(){
+    debugger;
+    // let d = new Date();
+    // new Date(d.getFullYear(), d.getMonth(), d.getDate(), d.getHours(), d.getMinutes() - d.getTimezoneOffset()).toISOString();
+    // var temp =(moment.utc(local.date));
+
     this.userService.updateUser(this.userId, this.user).subscribe( data =>{
       this.goToUserProfile(this.userId);
     }
@@ -70,6 +75,8 @@ export class UpdateUserComponent implements OnInit {
     this.router.navigate(['profile', userId]);
   }
 
-
+  changeStatus(v){
+    this.user.usersStatus=v.value;
+  }
 
 }

@@ -1,8 +1,8 @@
 <h2> Day Off Request List</h2>
-<table class="table table-striped">
-    <thead>
+<table class="table table-striped" >
+    <thead >
         <tr>
-            <th> userId</th>
+            <th> User Full Name</th>
             <th> Start Date</th>
             <th> End Date</th>
             <th> Reason</th>
@@ -12,9 +12,9 @@
         </tr>
     </thead>
     <tbody>
-        <div *ngFor="let user of users">
-        <tr *ngFor="let dayOff of daysOff">
-            <td > {{ user.username}}</td>
+        <!-- <div *ngFor="let user of users"> -->
+        <tr *ngFor="let dayOff of daysOff" >
+            <td > {{ dayOff.users.firstName}} {{ dayOff.users.lastName}}</td>
             <td> {{ dayOff.startDate}}</td>
             <td> {{ dayOff.endDate}}</td>
             <td> {{ dayOff.reason}}</td>
@@ -22,25 +22,34 @@
             <td> {{ dayOff.dayOffAmount}}</td>
             <td> {{ dayOff.leaveDaysLeft}}</td>
 
-            <td>
-                <select name="Status" (change)="changeStatus(theStatus)">
-                    <option *ngFor="let statusType of statusTypes"
-                    [value]="statusType">
-                        {{statusType}}
-                    </option>
-                </select>
-                <div>
-                    <input type="text" [(ngModel)] = "statusTypes">
-                    <!-- {{user.userId}} -->
-                    <button (click)="updateStatus(dayOff)" class="btn btn-info">Edit Request</button>
-                  </div>
 
-            </td>
+            <td>
+                <form (ngSubmit)="approveRequest(dayOff)">
+                    <div class="form-group">
+                    <label>Reject Reason</label>
+                    <input type="text" class="form-control" id="rejectReason" 
+                    [(ngModel)] = "dayOff.rejectReason" name="rejectReason">
+                    </div>
+                    <!-- <label>User Id</label>
+                    <input type="text" name="userId" [(ngModel)]="user.userId"> -->
+<!--                     
+                    <label>Day Off</label>
+                    <input type="text" name="dayOffId" [(ngModel)]="dayOff.dayOffId"> -->
+                    <fieldset id="group2">
+                    <input type="radio" value="APPROVED" name="APPROVED" (change)="approveStatus($event.target)">
+                    <label>approve</label>
+                    <input type="radio" value="REJECTED" name="REJECTED" (change)="approveStatus($event.target)">
+                    <label>reject</label>
+                    </fieldset>
+
+                    <!-- <input type="submit" value="Send Request"> -->
+                    <button class="btn btn-success" type="submit">Submit</button>
+                </form>
+
+
+        </td>
         </tr>
-        </div>
-        <!-- <tr *ngFor="let user of users">
-            <td> {{ user.userId}}</td>
-            <td> {{ user.leaveDaysLeft}}</td>
-        </tr> -->
+    
+        <!-- </div> -->
     </tbody>
 </table>

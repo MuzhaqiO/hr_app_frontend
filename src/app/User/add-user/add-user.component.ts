@@ -10,6 +10,7 @@ import { User } from '../user';
 })
 export class AddUserComponent implements OnInit {
 
+  isActive:boolean = false;
   user: User = new User();
   constructor(private userService: UserService, private router: Router) { }
 
@@ -31,5 +32,4 @@ export class AddUserComponent implements OnInit {
     console.log(this.user);
     this.saveUser();
   }
-
 }

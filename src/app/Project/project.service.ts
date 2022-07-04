@@ -10,7 +10,7 @@ import { User } from '../User/user';
 })
 export class ProjectService {
 
-  private baseURL="http://localhost:8080";
+  private baseURL="http://localhost:8080/hr_management/projects";
   constructor(private httpClient: HttpClient) { }
 
   addNewProject(project: Project): Observable<Object>{
@@ -22,6 +22,9 @@ export class ProjectService {
   getProjectByProjectId(projectId: Guid):Observable<Project>{
     return this.httpClient.get<Project>(`${this.baseURL+"/projects/id"}/${projectId}`);
   }
+  getProjectByTask(taskId: Guid):Observable<Project>{
+    return this.httpClient.get<Project>(`${this.baseURL+"/getByTask"}/${taskId}`);
+  }
   updateProject(projectId:Guid, project: Project): Observable<Object>{
     return this.httpClient.put(`${this.baseURL+"/projects/updateProject"}/${projectId}`, project);
   }
@@ -31,10 +34,16 @@ export class ProjectService {
   getProjectsByUserId(userId: Guid): Observable<Project[]>{
     return this.httpClient.get<Project[]>(`${this.baseURL+"/projects"}/${userId}`);
   }
-  assignUserToProject(projectId:Guid, userId:Guid):Observable<Object>{
-    return this.httpClient.patch(`${this.baseURL+"/assignUser"}/${projectId}/userId/${userId}`, null);
+  // assignUserToProject(projectId:Guid, userId:Guid):Observable<Object>{
+  //   return this.httpClient.patch(`${this.baseURL+"/assignUser"}/${projectId}/userId/${userId}`, null);
+  // }
+  assignUserToProject(projectId:Guid, username:string):Observable<Object>{
+    return this.httpClient.patch(`${this.baseURL+"/assignUser"}/${projectId}/username/${username}`, null);
   }
   deleteProject(projectId:Guid):Observable<Object>{
     return this.httpClient.delete(`${this.baseURL+"/projects/deleteProject"}/${projectId}`);
+  }
+  removeUserFromProject(projectId: Guid, userId: Guid): Observable<Object>{
+    return this.httpClient.patch(`${this.baseURL+"/removeUser"}/${projectId}/userId/${userId}`, null);
   }
 }

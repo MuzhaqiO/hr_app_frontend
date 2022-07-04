@@ -31,18 +31,46 @@ import { AddProjectToUserComponent } from './User/add-project-to-user/add-projec
 import { UserProjectsListComponent } from './User/user-projects-list/user-projects-list.component';
 import { AdminComponent } from './admin/admin.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './LoginFiles/login/login.component';
 import { HeaderComponent } from './header/header.component';
-// import { AuthGuard } from './_auth/auth.guard';
-import { AuthInterceptor } from './_auth/auth.interceptor';
+import { AuthGuard } from './LoginFiles/_auth/auth.guard';
+import { AuthInterceptor } from './LoginFiles/_auth/auth.interceptor';
 import { UserService } from './User/user.service';
-import { UserComponent } from './User/user/user.component';
 import { PlaceDayOffRequestComponent } from './dayOff/place-day-off-request/place-day-off-request.component';
 import { ProjectUserListComponent } from './Project/project-user-list/project-user-list.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatDialogModule} from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
+import { ReactiveFormsModule } from '@angular/forms';
+import { DayOffRequestsComponent } from './dayOff/day-off-requests/day-off-requests.component';
 
+import { RoleListComponent } from './Roles/role-list/role-list.component';
+import { RoleUserListComponent } from './Roles/role-user-list/role-user-list.component';
+import { AddRoleComponent } from './Roles/add-role/add-role.component';
+import { ChangePasswordComponent } from './User/change-password/change-password.component';
+import { AddEducationComponent } from './Education/add-education/add-education.component';
+import { UserEducationComponent } from './Education/user-education/user-education.component';
+import { UpdateEducationComponent } from './Education/update-education/update-education.component';
+import { UpdatePersonalFileComponent } from './Personal Files/update-personal-file/update-personal-file.component';
+import { AddPersonalFileComponent } from './Personal Files/add-personal-file/add-personal-file.component';
+import { AddTaskComponent } from './Task/add-task/add-task.component';
+import { AddUserToTaskComponent } from './Task/add-user-to-task/add-user-to-task.component';
+import { ProjectTaskComponent } from './Task/project-task/project-task.component';
+import { UpdateTaskComponent } from './Task/update-task/update-task.component';
+import { UserTaskComponent } from './Task/user-task/user-task.component';
+import { UserPersonalFileComponent } from './Personal Files/user-personal-file/user-personal-file.component';
+import { RoleDialogComponent } from './User/role-dialog/role-dialog.component';
+import { RemoveRoleDialogComponent } from './User/remove-role-dialog/remove-role-dialog.component';
+import { RemoveUserDialogComponent } from './Project/remove-user-dialog/remove-user-dialog.component';
+import { DatePipe } from '@angular/common';
+import { AddSkillComponent } from './Skills/add-skill/add-skill.component';
+import { SkillListComponent } from './Skills/skill-list/skill-list.component';
+import { SkillUserListComponent } from './Skills/skill-user-list/skill-user-list.component';
+import { AddSkillDialogComponent } from './User/add-skill-dialog/add-skill-dialog.component';
+import { RemoveSkillDialogComponent } from './User/remove-skill-dialog/remove-skill-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -68,9 +96,33 @@ import {MatNativeDateModule} from '@angular/material/core';
     ForbiddenComponent,
     LoginComponent,
     HeaderComponent,
-    UserComponent,
     PlaceDayOffRequestComponent,
-    ProjectUserListComponent
+    ProjectUserListComponent,
+    DayOffRequestsComponent,
+    RoleListComponent,
+    RoleUserListComponent,
+    AddRoleComponent,
+    ChangePasswordComponent,
+    AddEducationComponent,
+    UserEducationComponent,
+    UpdateEducationComponent,
+    UpdatePersonalFileComponent,
+    AddPersonalFileComponent,
+    AddTaskComponent,
+    AddUserToTaskComponent,
+    ProjectTaskComponent,
+    UpdateTaskComponent,
+    UserTaskComponent,
+    UserPersonalFileComponent,
+    RoleDialogComponent,
+    RemoveRoleDialogComponent,
+    RemoveUserDialogComponent,
+    AddSkillComponent,
+    SkillListComponent,
+    SkillUserListComponent,
+    AddSkillDialogComponent,
+    RemoveSkillDialogComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -78,7 +130,6 @@ import {MatNativeDateModule} from '@angular/material/core';
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    AppRoutingModule,
     MatToolbarModule,
     MatSidenavModule,
     MatButtonModule,
@@ -87,15 +138,23 @@ import {MatNativeDateModule} from '@angular/material/core';
     FormsModule,
     MatFormFieldModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatCardModule,
+    ReactiveFormsModule,
+    MatMenuModule,
+    MatDialogModule
   ],
   providers: [
-  //   AuthGuard,
-  //  { provide: HTTP_INTERCEPTORS,
-  //   useClass:AuthInterceptor,
-  //   multi:true
-  // },
-  UserService
+    AuthGuard,
+   { provide: HTTP_INTERCEPTORS,
+    useClass:AuthInterceptor,
+    multi:true
+
+  },
+  LoginComponent,
+  UserService,
+  [DatePipe]
+
   ],
   bootstrap: [AppComponent]
 })
